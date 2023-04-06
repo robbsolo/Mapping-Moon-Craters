@@ -1,0 +1,38 @@
+import bpy
+
+
+data_X = []
+data_Y = []
+data_Z = []
+size = []
+
+with open('data_x', 'r') as f1:
+    lines = f1.readlines()
+    for line in lines:
+        data_X.append(float(line))
+
+with open('data_y', 'r') as f2:
+    lines = f2.readlines()
+    for line in lines:
+        data_Y.append(float(line))
+
+with open('data_z', 'r') as f3:
+    lines = f3.readlines()
+    for line in lines:
+        data_Z.append(float(line))
+        
+with open('size', 'r') as f4:
+    lines = f4.readlines()
+    for line in lines:
+        size.append(float(line))
+
+print(data_X)
+print(data_Y)
+print(data_Z)
+
+# Number of points
+nr = 100
+
+for i in range(nr):
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=0.05*size[i]/520, enter_editmode=False, location=(data_X[i], data_Y[i], data_Z[i]))
+    bpy.ops.object.shade_smooth()
